@@ -20,99 +20,84 @@
 // Order in this array = display order in the app (top to bottom, left to right in the grid).
 export const FOODS = [
   {
-    id: "com-tam-suon-bi-cha",
-    name: "Cơm tấm sườn bì chả",
-    description: "Cơm tấm với sườn nướng, bì heo và chả trứng hấp.",
+    id: "com-bun-rieu",
+    name: "Quán cơm bún riêu",
+    description:
+      "Một bữa cơm giản dị, thêm tô bún riêu đậm đà cho những ngày muốn ăn thật ngon.",
     category: "Cơm",
     emoji: "🍚",
   },
   {
-    id: "com-ga-xoi-mo",
-    name: "Cơm gà xối mỡ",
-    description: "Gà chiên giòn ăn kèm cơm, rưới mỡ hành và tỏi phi thơm lừng.",
-    category: "Cơm",
-    emoji: "🍗",
-  },
-  {
-    id: "com-chien-duong-chau",
-    name: "Cơm chiên dương châu",
+    id: "com-o-ngo",
+    name: "Quán cơm ở ngõ",
     description:
-      "Cơm chiên kiểu Dương Châu với tôm, xá xíu, đậu Hà Lan và trứng.",
+      "Một quán cơm nép mình trong con ngõ nhỏ, mang đến cảm giác thân quen như một bữa cơm nhà.",
     category: "Cơm",
-    emoji: "🍛",
+    emoji: "🍚",
   },
   {
-    id: "bun-bo-hue",
-    name: "Bún bò Huế",
-    description: "Bún bò cay đậm đà kiểu Huế với thịt bò, giò heo và sả thơm.",
-    category: "Bún",
-    emoji: "🍜",
-  },
-  {
-    id: "bun-cha",
-    name: "Bún chả",
+    id: "bun-cha-ba-gia",
+    name: "Bún chả bà già",
     description:
-      "Chả viên và thịt ba chỉ nướng, ăn cùng bún và nước chấm chua ngọt.",
+      "Mùi thịt nướng thơm lừng, chả viên vàng ruộm quyện cùng bát nước chấm chua ngọt đậm đà.",
     category: "Bún",
     emoji: "🍖",
   },
   {
-    id: "bun-thit-nuong",
-    name: "Bún thịt nướng",
+    id: "banh-canh",
+    name: "Bánh canh",
     description:
-      "Thịt heo nướng ăn cùng bún, rau sống, đồ chua và nước mắm pha.",
-    category: "Bún",
-    emoji: "🥗",
-  },
-  {
-    id: "bun-rieu",
-    name: "Bún riêu",
-    description: "Bún riêu cua đậm đà vị cà chua, ăn kèm đậu hũ chiên.",
-    category: "Bún",
-    emoji: "🍲",
-  },
-  {
-    id: "pho-bo",
-    name: "Phở bò",
-    description:
-      "Phở bò truyền thống với thịt bò tái, nước dùng thơm và rau thơm.",
-    category: "Phở",
+      "Những sợi bánh canh mềm dai trong làn nước dùng nóng hổi, giản dị mà cuốn hút.",
+    category: "Bánh canh",
     emoji: "🍜",
   },
   {
-    id: "pho-ga",
-    name: "Phở gà",
-    description: "Phở nước trong với thịt gà xé và rau thơm ăn kèm.",
-    category: "Phở",
-    emoji: "🥣",
+    id: "bun-ca-nga-tu",
+    name: "Bún cá ngã tư",
+    description:
+      "Tô bún cá nóng hổi với miếng cá thơm giòn, nước dùng thanh ngọt cho một bữa ăn nhẹ nhàng.",
+    category: "Bún",
+    emoji: "🐟",
   },
   {
-    id: "mien-ga",
-    name: "Miến gà",
-    description: "Miến nấu với thịt gà xé, mộc nhĩ và rau thơm.",
+    id: "bun-bo-hue",
+    name: "Bún bò Huế",
+    description:
+      "Vị cay nồng của sa tế, hương sả thơm lừng hòa quyện trong nước dùng đậm đà chuẩn vị miền Trung.",
+    category: "Bún",
+    emoji: "🍜",
+  },
+  {
+    id: "bun-dau-hoa-binh",
+    name: "Bún đậu Hòa Bình",
+    description:
+      "Mẹt bún đậu dân dã với đậu chiên vàng giòn, chả thơm béo và chén mắm tôm dậy vị.",
+    category: "Bún",
+    emoji: "🥢",
+  },
+  {
+    id: "mien-ngan-nga-tu",
+    name: "Miến ngan ngã tư",
+    description:
+      "Miến mềm trong veo, thịt ngan ngọt thơm cùng nước dùng nóng hổi, vừa thanh vừa đậm đà.",
     category: "Miến",
     emoji: "🍲",
   },
   {
-    id: "mien-luon",
-    name: "Miến lươn",
-    description: "Miến ăn cùng lươn chiên giòn, hành phi và nước dùng đậm đà.",
-    category: "Miến",
-    emoji: "🥘",
+    id: "bun-thang",
+    name: "Bún thang",
+    description:
+      "Một tô bún thanh tao với thịt gà, trứng thái sợi và giò, tinh tế trong từng lớp hương vị.",
+    category: "Bún",
+    emoji: "🍜",
   },
   {
-    id: "xoi-man",
-    name: "Xôi mặn",
-    description: "Xôi mặn với lạp xưởng, ruốc, chà bông và hành phi.",
-    category: "Xôi",
-    emoji: "🍙",
-  },
-  {
-    id: "xoi-ga",
-    name: "Xôi gà",
-    description: "Xôi ăn kèm thịt gà xé, chà bông và hành phi.",
-    category: "Xôi",
-    emoji: "🍙",
+    id: "com-ga-bao-ngoc",
+    name: "Cơm gà Bảo Ngọc",
+    description:
+      "Đĩa cơm gà vàng óng, thịt gà mềm thơm và đậm vị, gợi nhớ một bữa cơm ngon lành, trọn vẹn.",
+    category: "Cơm",
+    emoji: "🍗",
   },
 ];
 
