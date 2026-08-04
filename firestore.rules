@@ -1,0 +1,51 @@
+rules_version = '2';
+
+// Paste this into Firebase console -> Firestore Database -> Rules, or deploy with the
+// Firebase CLI (`firebase deploy --only firestore:rules`) once you have a firebase.json.
+//
+// No auth is used for this app (open voting), so anyone can create/overwrite a vote document.
+// We still validate the shape/size of the data so the "votes" collection can't be
+// filled with garbage or used to store arbitrary large documents.
+//
+// Each vote document id is deterministic (`{day}_{slugified voter name}`), so re-voting
+// (e.g. after a page reload) overwrites the same document instead of creating a duplicate —
+// hence "update" needs the same validation as "create", not `if false`.
+//
+// `expireAt` is a Firestore TTL marker (see docs/README notes on TTL policies) that lets old
+// votes delete themselves automatically once their day is over — it must be a future timestamp.
+// TTL policies require the Google Cloud console (which can prompt for a billing account even on
+// the free tier), so `allow delete` is also open here to support the in-app "delete old votes"
+// button (ResultsView.tsx) as a no-billing-required fallback. This app already has no auth and
+// open create/update, so this doesn't introduce a new trust boundary.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /votes/{voteId} {
+      allow read: if true;
+
+      allow create, update: if request.resource.data.keys().hasOnly(['foodId', 'voterName', 'day', 'createdAt', 'expireAt'])
+        && request.resource.data.foodId is string
+        && request.resource.data.foodId.size() > 0
+        && request.resource.data.foodId.size() < 50
+        && request.resource.data.voterName is string
+        && request.resource.data.voterName.size() < 100
+        && request.resource.data.day is string
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.expireAt is timestamp
+        && request.resource.data.expireAt > request.time;
+
+      allow delete: if true;
+    }
+
+    // The lunch menu and team roster are meant to be managed via the Firebase console or a
+    // one-off script (the app itself never writes to these), but writes are left open —
+    // consistent with the rest of this app having no auth — so you can reseed/edit them
+    // without having to republish rules every time.
+    match /foods/{foodId} {
+      allow read, write: if true;
+    }
+
+    match /people/{personId} {
+      allow read, write: if true;
+    }
+  }
+}
