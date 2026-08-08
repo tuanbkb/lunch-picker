@@ -58,15 +58,22 @@ export function subscribeToTodayResults(
   return onSnapshot(
     todayVotesQuery,
     (snapshot) => {
-      const tally = new Map<string, number>();
+      const voterNamesByFood = new Map<string, string[]>();
       snapshot.forEach((doc) => {
-        const foodId = doc.data().foodId as string;
-        tally.set(foodId, (tally.get(foodId) ?? 0) + 1);
+        const data = doc.data();
+        const foodId = data.foodId as string;
+        const voterName = data.voterName as string;
+        const voterNames = voterNamesByFood.get(foodId) ?? [];
+        voterNames.push(voterName);
+        voterNamesByFood.set(foodId, voterNames);
       });
-      const results: VoteResult[] = Array.from(tally.entries()).map(([foodId, votes]) => ({
-        foodId,
-        votes,
-      }));
+      const results: VoteResult[] = Array.from(voterNamesByFood.entries()).map(
+        ([foodId, voterNames]) => ({
+          foodId,
+          votes: voterNames.length,
+          voterNames,
+        }),
+      );
       onUpdate(results);
     },
     (error) => {

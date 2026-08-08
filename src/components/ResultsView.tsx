@@ -4,6 +4,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -60,13 +61,14 @@ export default function ResultsView() {
     return <Alert severity="error">{resultsError ?? foodsError}</Alert>;
   }
 
-  const resultsByFoodId = new Map(results.map((result) => [result.foodId, result.votes]));
+  const resultsByFoodId = new Map(results.map((result) => [result.foodId, result]));
   const maxVotes = Math.max(1, ...results.map((result) => result.votes));
 
   const ranked = foods
     .map((food) => ({
       food,
-      votes: resultsByFoodId.get(food.id) ?? 0,
+      votes: resultsByFoodId.get(food.id)?.votes ?? 0,
+      voterNames: resultsByFoodId.get(food.id)?.voterNames ?? [],
     }))
     .sort((a, b) => b.votes - a.votes);
 
@@ -78,7 +80,7 @@ export default function ResultsView() {
           : `Đã có ${totalVotes} lượt bình chọn hôm nay`}
       </Typography>
 
-      {ranked.map(({ food, votes }, index) => (
+      {ranked.map(({ food, votes, voterNames }, index) => (
         <Paper key={food.id} variant="outlined" sx={{ p: 2 }}>
           <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
             <Typography component="div" sx={{ fontSize: 28, lineHeight: 1, width: 36 }}>
@@ -101,6 +103,18 @@ export default function ResultsView() {
                 value={(votes / maxVotes) * 100}
                 sx={{ mt: 0.75, height: 8, borderRadius: 4 }}
               />
+              {voterNames.length > 0 && (
+                <Stack
+                  direction="row"
+                  spacing={0.5}
+                  useFlexGap
+                  sx={{ flexWrap: 'wrap', mt: 1 }}
+                >
+                  {voterNames.map((name) => (
+                    <Chip key={name} label={name} size="small" variant="outlined" />
+                  ))}
+                </Stack>
+              )}
             </Box>
           </Stack>
         </Paper>

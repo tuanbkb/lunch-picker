@@ -14,4 +14,5 @@ export interface VoteSubmission {
 export interface VoteResult {
   foodId: string;
   votes: number;
+  voterNames: string[];
 }
