@@ -18,6 +18,7 @@ import Tabs from '@mui/material/Tabs';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { submitVote } from '../api/voteApi';
+import DeciderView from '../components/DeciderView';
 import FoodCard from '../components/FoodCard';
 import ResultsView from '../components/ResultsView';
 import { useFoods } from '../hooks/useFoods';
@@ -111,14 +112,19 @@ export default function VotePage() {
         value={activeTab}
         onChange={handleTabChange}
         centered
+        variant="scrollable"
+        allowScrollButtonsMobile
         sx={{ mb: 3, borderBottom: 1, borderColor: 'divider' }}
       >
         <Tab label="Bình chọn" />
         <Tab label="Kết quả trực tiếp" />
+        <Tab label="Quyết định" />
       </Tabs>
 
       {activeTab === 1 ? (
         <ResultsView />
+      ) : activeTab === 2 ? (
+        <DeciderView />
       ) : isLoadingCatalog ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
           <CircularProgress />
